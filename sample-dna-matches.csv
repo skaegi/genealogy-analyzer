@@ -1,0 +1,11 @@
+Match Name,Relationship,Shared DNA (cM),Number of Segments,Estimated Relationship
+Michael Smith,Close Family,1825,42,Son
+Emily Smith,Close Family,1780,38,Daughter
+Robert Smith,Close Family,3400,87,Self
+Sarah Brown,Close Family,1720,35,Daughter-in-law
+John Smith,Close Family,3400,89,Father
+Mary Johnson,Close Family,3350,85,Mother
+James Smith,2nd-3rd Cousin,125,8,Grandfather
+Helen Davis,2nd-3rd Cousin,135,9,Grandmother
+Lisa Johnson,4th-6th Cousin,45,3,Distant Cousin
+David Brown,4th-6th Cousin,38,2,Distant Cousin

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genealogy DNA Match Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Genealogy DNA Match Analyzer</h1>
+            <p>Find common ancestors between your DNA matches</p>
+        </header>
+        
+        <main>
+            <section class="upload-section">
+                <h2>Upload Your Data</h2>
+                <div class="upload-area">
+                    <div class="upload-box">
+                        <h3>Family Tree (GEDCOM)</h3>
+                        <input type="file" id="gedcom-file" accept=".ged,.gedcom" />
+                        <label for="gedcom-file">Choose GEDCOM file</label>
+                        <p>Upload your family tree data (.ged format)</p>
+                    </div>
+                    
+                    <div class="upload-box">
+                        <h3>DNA Matches (CSV)</h3>
+                        <input type="file" id="dna-matches" accept=".csv,.txt" />
+                        <label for="dna-matches">Choose CSV file</label>
+                        <p>Upload DNA match data from AncestryDNA, 23andMe, etc.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="analysis-section" style="display: none;">
+                <h2>Analysis Results</h2>
+                <div id="results-container">
+                    <div class="matches-grid">
+                        <div class="match-card">
+                            <h3>DNA Matches</h3>
+                            <div id="matches-list"></div>
+                        </div>
+                        
+                        <div class="match-card">
+                            <h3>Common Ancestors</h3>
+                            <div id="ancestors-list"></div>
+                        </div>
+                        
+                        <div class="match-card">
+                            <h3>Match Connections</h3>
+                            <div id="connections-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="genealogy.js"></script>
+</body>
+</html>
