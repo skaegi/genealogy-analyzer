@@ -285,11 +285,13 @@ class GenealogyAnalyzer {
     }
 
     updateDisplay() {
+        document.querySelector('.analysis-section').style.display = 'block';
+        
         if (this.familyTree && this.dnaMatches.length > 0) {
-            document.querySelector('.analysis-section').style.display = 'block';
-            
             const results = this.analyzeDnaMatches();
             this.displayResults(results);
+        } else {
+            this.displayResults(null);
         }
     }
 
@@ -303,9 +305,11 @@ class GenealogyAnalyzer {
                     ${match.relationship ? `<br><small>Relationship: ${match.relationship}</small>` : ''}
                 </div>`
             ).join('') + (this.dnaMatches.length > 10 ? `<p><small>... and ${this.dnaMatches.length - 10} more</small></p>` : '');
+        } else {
+            matchesList.innerHTML = '<p>Upload CSV file to see DNA matches</p>';
         }
         
-        // Display common ancestors
+        // Display family tree info
         const ancestorsList = document.getElementById('ancestors-list');
         if (results && results.commonAncestors.length > 0) {
             ancestorsList.innerHTML = results.commonAncestors.map(ancestor => 
@@ -315,8 +319,18 @@ class GenealogyAnalyzer {
                     ${ancestor.deathDate ? `<br><small>Died: ${ancestor.deathDate}</small>` : ''}
                 </div>`
             ).join('');
+        } else if (this.familyTree && Object.keys(this.familyTree.individuals).length > 0) {
+            const individuals = Object.values(this.familyTree.individuals).slice(0, 5);
+            ancestorsList.innerHTML = `<p><strong>Family tree loaded:</strong> ${Object.keys(this.familyTree.individuals).length} individuals</p>` +
+                individuals.map(person => 
+                    `<div class="ancestor-item">
+                        <strong>${person.name}</strong>
+                        ${person.birthDate ? `<br><small>Born: ${person.birthDate}</small>` : ''}
+                    </div>`
+                ).join('') +
+                (Object.keys(this.familyTree.individuals).length > 5 ? '<p><small>Upload DNA matches to find connections</small></p>' : '');
         } else {
-            ancestorsList.innerHTML = '<p>Upload both files to find common ancestors</p>';
+            ancestorsList.innerHTML = '<p>Upload GEDCOM file to see family tree</p>';
         }
         
         // Display match connections
@@ -330,8 +344,10 @@ class GenealogyAnalyzer {
                     ${connection.commonAncestors.map(a => a.name).join(', ')}</small>
                 </div>`
             ).join('');
+        } else if (this.familyTree && this.dnaMatches.length > 0) {
+            connectionsList.innerHTML = '<p>No connections found between DNA matches and family tree</p>';
         } else {
-            connectionsList.innerHTML = '<p>No connections found between DNA matches</p>';
+            connectionsList.innerHTML = '<p>Upload both files to find connections</p>';
         }
     }
 }
